@@ -1,17 +1,21 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
 /*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
+The section below creates an Album database table with fields for album data.
+The authorization rule below specifies that any user authenticated via an
+API key can "create", "read", "update", and "delete" any "Album" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
+  Album: a
     .model({
-      content: a.string(),
+      title: a.string(),
+      artist: a.string(),
+      releaseYear: a.string(),
+      coverArtUrl: a.string(),
+      mbid: a.string(), // MusicBrainz ID
+      rank: a.integer(), // Rank for user's ranking (implicitly optional)
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .authorization(allow => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -19,7 +23,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
+    defaultAuthorizationMode: 'apiKey',
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
@@ -52,6 +56,6 @@ Fetch records from the database and use them in your frontend component.
 
 /* For example, in a React component, you can use this snippet in your
   function's RETURN statement */
-// const { data: todos } = await client.models.Todo.list()
+// const { data: albums } = await client.models.Album.list()
 
-// return <ul>{todos.map(todo => <li key={todo.id}>{todo.content}</li>)}</ul>
+// return <ul>{albums.map(album => <li key={album.id}>{album.title} - {album.artist}</li>)}</ul>

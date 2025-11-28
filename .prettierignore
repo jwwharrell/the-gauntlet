@@ -1,0 +1,14 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+dist
+
+# Ignore all HTML files:
+*.html
+
+# Ignore package-lock.json
+package-lock.json
+
+# Ignore AWS Amplify generated files
+amplify/backend
