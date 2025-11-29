@@ -161,7 +161,7 @@ export default function App() {
       <Container maxWidth="lg" sx={{ py: { xs: 2, sm: 4 } }}>
         <Box sx={{ mb: 4, textAlign: 'center' }}>
           <Typography variant="h1" component="h1">
-            Album Ranker
+            The Gauntlet
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" gutterBottom>
             Search for your favorite albums and create your personal ranking
